@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
 
-function App() {
+const MostraVoltas = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <p>
+      {props.volta} <br/> 
+      Voltas
+    </p>
+  )
+}
+
+const MostraTempo = (props) => {
+  return (
+    <p>
+      {props.tempo}<br/>
+      Tempo médio por volta
+    </p>
+  )
+}
+
+const Button = (props) => <button onClick={props.onClick}>{props.text}</button>
+function App() {
+  const [numVoltas, setNumVoltas] = useState(14)
+  const [tempo, setTempo] = useState(0)
+
+  useEffect(() => {
+    setInterval(() => {
+      console.log('chamou');
+      
+    }, 1000)
+  }, [])
+
+
+  const increment = () => {
+    setNumVoltas(numVoltas + 1)
+    console.log(numVoltas);
+  }
+  const decrement = () => {
+    setNumVoltas(numVoltas - 1)
+    console.log(numVoltas);
+    
+  }
+  return (
+    <div className='App'>
+      <MostraVoltas volta={numVoltas}/>
+      <Button text='+' onClick={increment}/>
+      <Button text='-' onClick={decrement}/>
+      <MostraTempo tempo={tempo}/>
+      <Button text='Iniciar'/>
+      <Button text='Reiniciar'/>
     </div>
-  );
+  )
 }
 
 export default App;
